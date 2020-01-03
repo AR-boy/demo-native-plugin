@@ -2,10 +2,20 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "build hello world",
+            "label": "declaring dllexport for test_dll",
             "type": "shell",
             "command": "g++",
-            "args": ["-g", "-o", "helloworld", "helloworld.cpp"],
+            "args": ["-g", "-DBUILDING_TEST_DLL", "test_dll.cpp"],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "building test_dll",
+            "type": "shell",
+            "command": "g++",
+            "args": ["-shared", "-o", "test_dll.dll", "test_dll.o", "-Wl,--out-implib,libtest_dll.a"],
             "group": {
                 "kind": "build",
                 "isDefault": true
